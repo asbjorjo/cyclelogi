@@ -1,0 +1,32 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<h:panelGrid columns="3">
+			<h:outputLabel value="First Name:"/>
+			<h:inputText id="firstName" value="#{personEdit.person.firstName}" required="true" requiredMessage="required"/>
+			<h:message for="firstName"/>
+			<h:outputLabel value="Last Name:"/>
+			<h:inputText id="lastName" value="#{personEdit.person.lastName}" required="true" requiredMessage="required"/>
+			<h:message for="lastName"/>
+			<h:outputLabel value="Birthday:"/>
+			<h:inputText value="#{personEdit.person.birthday}">
+				<f:convertDateTime pattern="dd/mm/yyyy"/>
+			</h:inputText>
+			<h:outputText />
+			<h:outputLabel value="Email:"/>
+			<h:inputText id="email" value="#{personEdit.person.email}" required="true" requiredMessage="required"/>
+			<h:message for="email"/>
+		</h:panelGrid>
+		<h:outputLabel value="Roles"/>
+		<p:pickList id="roles" value="#{personEdit.roles}" var="role" itemValue="#{role}" itemLabel="#{role.role.name}" converter="entityConverter">
+			<p:ajax event="transfer" listener="#{personEdit.onTransfer}"/>
+		</p:pickList>
+		<h:commandButton value="Add Person" action="#{personEdit.addPerson}" rendered="#{personEdit.person.id == null}"/>
+		<h:commandButton value="Update Person" action="#{personEdit.updatePerson}" rendered="#{personEdit.person.id != null}"/>
+	</h:form>
+</ui:composition>

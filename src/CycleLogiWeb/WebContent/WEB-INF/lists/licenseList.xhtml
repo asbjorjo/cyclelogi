@@ -1,0 +1,40 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:dataTable value="#{licenseController.allLicenses}" var="license">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Owner"/>
+			</f:facet>
+			<h:outputText value="#{license.personRole.person.lastName}, #{license.personRole.person.firstName}"/>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Role"/>
+			</f:facet>
+			<h:outputText value="#{license.personRole.role.name}"/>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="License Number"/>
+			</f:facet>
+			<h:outputText value="#{license.number}"/>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Validity"/>
+			</f:facet>
+			<h:outputText value="#{license.valid.startDate.time}">
+				<f:convertDateTime pattern="yyyy/MM/dd"/>
+			</h:outputText>
+			<h:outputText value="-"/>
+			<h:outputText value="#{license.valid.endDate.time}">
+				<f:convertDateTime pattern="yyyy/MM/dd"/>
+			</h:outputText>
+		</h:column>
+	</h:dataTable>
+</ui:composition>

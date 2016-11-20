@@ -1,0 +1,32 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">CycleLogi</ui:define>
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="personId" value="#{personEdit.person.id}"/>
+			<f:event listener="#{personEdit.loadPerson}" type="preRenderView"/>
+		</f:metadata>
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:panelGrid columns="2">
+			<h:outputLabel value="First Name:"/>
+			<h:outputText value="#{personEdit.person.firstName}"/>
+			<h:outputLabel value="Last Name:"/>
+			<h:outputText value="#{personEdit.person.lastName}"/>
+			<h:outputLabel value="Birthday:"/>
+			<h:outputText value="#{personEdit.person.birthday}"/>
+			<h:outputLabel value="Email:"/>
+			<h:outputText value="#{personEdit.person.email}"/>
+			<h:outputLabel value="Roles"/>
+			<ui:repeat var="role" value="#{personEdit.person.personRoles}">
+				<h:outputText value="#{role.role.name} "/>
+			</ui:repeat>
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>

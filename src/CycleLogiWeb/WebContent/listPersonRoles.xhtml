@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Person Roles</title>
+</head>
+<body>
+<f:view>
+<h:dataTable value="#{personRoleController.personRoles}" var="personRole">
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="First Name"/>
+		</f:facet>
+		<h:outputText value="#{personRole.person.firstName}"/>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="Last Name"/>
+		</f:facet>
+		<h:outputText value="#{personRole.person.lastName}"/>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="Role"/>
+		</f:facet>
+		<h:outputText value="#{personRole.role.name} "/>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="Active"/>
+		</f:facet>
+		<h:outputText value="#{personRole.active} "/>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="Licenses"/>
+		</f:facet>
+		<ui:repeat var="license" value="#{personRole.licenses}">
+			<h:outputText value="#{license.number} "/>
+		</ui:repeat>
+	</h:column>
+</h:dataTable>
+</f:view>
+</body>
+</html>

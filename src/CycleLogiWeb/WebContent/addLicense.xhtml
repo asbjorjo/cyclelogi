@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Add license</title>
+	</h:head>
+	<h:body>
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{licenseController.startConversation}" type="preRenderView"/>
+		</f:metadata>
+	</ui:define>
+		<f:view>
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Person:"/>
+					<h:selectOneMenu value="#{licenseController.selectedPerson}" converter="entityConverter">
+						<f:selectItem itemLabel="Select Person" noSelectionOption="true"/>
+						<f:selectItems value="#{licenseController.availablePeople}" var="person" itemValue="#{person}" itemLabel="#{person.firstName} #{person.lastName}"/>
+						<f:ajax listener="#{licenseController.changePerson}" render="roles"/>
+					</h:selectOneMenu>
+					<h:outputLabel value="Role:"/>
+					<h:selectOneMenu id="roles" value="#{licenseController.selectedRole}" converter="entityConverter">
+						<f:selectItems value="#{licenseController.availableRoles}" var="role" itemValue="#{role}" itemLabel="#{role.role.name}"/>
+					</h:selectOneMenu>
+					<h:outputLabel value="Number:"/>
+					<h:inputText value="#{licenseController.license.number}"/>
+					<h:outputLabel value="Valid from:"/>
+					<p:calendar value="#{licenseController.license.valid.startDate.time}" pattern="dd/MM/yyyy" navigator="true"/>
+					<h:outputLabel value="Expiration:"/>
+					<p:calendar value="#{licenseController.license.valid.endDate.time}" pattern="dd/MM/yyyy" navigator="true"/>
+				</h:panelGrid>
+				<h:commandButton value="Add License" action="#{licenseController.addLicense}"/>
+			</h:form>
+		</f:view>
+	</h:body>
+</html>

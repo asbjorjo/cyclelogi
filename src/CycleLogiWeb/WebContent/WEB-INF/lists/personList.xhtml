@@ -1,0 +1,58 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<h:dataTable value="#{personController.persons}" var="person">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Last Name"/>
+				</f:facet>
+				<h:outputText value="#{person.lastName}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="First Name"/>
+				</f:facet>
+				<h:outputText value="#{person.firstName}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Email"/>
+				</f:facet>
+				<h:outputText value="#{person.email}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Address"/>
+				</f:facet>
+				<h:outputText value="#{person.address.street}, #{person.address.postCode} #{person.address.city}, #{person.address.country}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Roles"/>
+				</f:facet>
+				<ui:repeat var="role" value="#{person.personRoles}">
+					<h:outputText value="#{role.role.name} "/>
+				</ui:repeat>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Action"/>
+				</f:facet>
+				<h:panelGroup class="action">
+					<h:commandLink value="Delete" action="#{personController.deletePerson(person.id)}"/>
+					<h:link outcome="personDetail" value="View" includeViewParams="true">
+						<f:param name="personId" value="#{person.id}"/>
+					</h:link>
+					<h:link outcome="personEdit" value="Edit" includeViewParams="true">
+						<f:param name="personId" value="#{person.id}"/>
+					</h:link>
+				</h:panelGroup>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</ui:composition>

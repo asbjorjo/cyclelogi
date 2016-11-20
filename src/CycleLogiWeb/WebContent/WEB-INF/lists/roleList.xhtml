@@ -1,0 +1,46 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<h:dataTable value="#{roleController.availableRoles}" var="role">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Name"/>
+				</f:facet>
+				<h:outputText value="#{role.name}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Description"/>
+				</f:facet>
+				<h:outputText value="#{role.description}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Require license"/>
+				</f:facet>
+				<h:outputText value="#{role.licensed}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="People"/>
+				</f:facet>
+				<ui:repeat var="personRole" value="#{role.personRoles}">
+					<h:outputText value="#{personRole.person.lastName}, #{personRole.person.firstName} "/>
+				</ui:repeat>
+			</h:column>	
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Action"/>
+				</f:facet>
+				<h:panelGroup class="action">
+					<h:commandLink value="Delete" action="#{roleController.deleteRole(role)}"/>
+				</h:panelGroup>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</ui:composition>
