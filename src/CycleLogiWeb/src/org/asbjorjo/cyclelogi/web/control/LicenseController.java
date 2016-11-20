@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,7 +18,6 @@ import org.asbjorjo.cyclelogi.data.entity.Person;
 import org.asbjorjo.cyclelogi.data.entity.PersonRole;
 import org.asbjorjo.cyclelogi.service.LicenseService;
 import org.asbjorjo.cyclelogi.service.PersonRoleService;
-import org.asbjorjo.cyclelogi.service.PersonService;
 
 @Named
 @ConversationScoped
